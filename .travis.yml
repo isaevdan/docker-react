@@ -1,14 +1,20 @@
 sudo: required
+
+env:
+  global:
+    secure: ByKarE8TLrj1vZa0hX7aPTGTsXDNPx9z3rNsOC38aDZqCHYPTjAbxQtUwDsBjp/dIqwCPF0E0NMjkLF3jJAI5ojjA+NVyngBYW8Nkgy+erbrY8sybfkp3zAubD1K6OOaV7tFhjYkNxfcS7cvbDzdlObOLqi5X96ZUXrAH3ZiOvUDGsPF++5xJRats5FyGzYN4wJi/64ZiDVWvO1HrIEoMjn3c2ARC+3H5O3i9AQ9ok0q+iHcRsiz1nF49e0ffW8PuXunrYk9xztYfq4kOr08GEEZzv+Ayx+OEi3Q7Uhm+9PB/XY1dJs5y4mv/Zi+BEPDsiJkqJ1uHj2dqtfqeZE+qdCR5tf2VjAq8WFWznSWvKsrl4JqiSsIsmyy2wr0yHi0NhK/NzkVyWh8VZbZ9etf86FhqcU66gkSHQ9lJDsmTCrNr98SR4JZlh7zshgHZ1fYUg18IrfLxs1CWO6QVO+Y+1yf3SNCsHWqqvwHtv7BXKvArlUtNprbP+D6u23hBOxwq60sb9EX31I/kvJ0qHmYykutygDj0IZEaMeBRNiQsmHlUyTL/J2hR8A6R6r69ty5G2PfI2xPj0LNzpbWUw3qVHrb7ch1i3PxAxRdtfouGQkktOwF8VEc1RBnWXP442eDJ5KrQGxqxsVMNf/3+OXq2XUVGpn+cu/NJAsh2YQJ700=
+dd:
+  secure: gTVdVpA7srvQrMNTZUxO5JNlTe/rmifAorr08FE1IwsUNb91Cx4LUphg2Qi/bDRPfYSMBtqrR1xJpjPLUZ/EvykEeN5YE0y05XCqZqxuokbTX59/eAC+U0qa8foaiY6p+O/hqlB0elqL8ZhytuoLup5tO2A934TWYYp08PW8Wut5lSarVjMzABT9CQaa4LoJDMvh6flCAe2qiU6bGQJo0DCyF7daAbB1mYXLrByS1tFFLC+CDtjz8Dv0RO2qddXsw0PizQBkHFLOcrbMgvTHwhs5m5GT2oiv9x9NZ/SRcIJcXDO1YtxLNX/BVWx7tN0AE8FB76VBs8539jgPfeRmTkc/0iPvWBJrRk0sA4DolLPImAh71VYvvuc91Y7dPgmstAl/nXLSO+veICjHhxG/Mw2BXh7unfnKn5GPnQBXQIkjGsW5crb9t3QIIV9ksD+zHapr7nLky7ftYyyvAdqJih31Ga7Y2jqP9GHp4FGgDdI4hyEdHa8RIYkQAaNEQkYUY/Uar9R/P+iefPQHQ14duCNcEG6U+rUy0t83FArg8m+mmxpDp6k5Ex4k1WQEOQMkoVAMKzExbEJIVDce9GrfODR9277L/eewZhEqnBpTeaX5OGVy7ZRqQxR+JvhXinsFORLooc/ZcwxDyHzQAkz0Hug+jY/eB8ugppvzQUgYb3w=
+
 services:
-  - docker
+- docker
 
 before_install:
-  - docker build -t denysisaievsbtech/docker-react -f Dockerfile.dev .
-
+- docker build -t denysisaievsbtech/docker-react -f Dockerfile.dev .
 script:
-  - docker run denysisaievsbtech/docker-react npm run test -- --coverage
+- docker run denysisaievsbtech/docker-react npm run test -- --coverage
 
-deplouy:
+deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
   app: "docker"
@@ -17,7 +23,7 @@ deplouy:
   bucket_path: "docker"
   on:
     branch: master
-  access_key_id: 
-    secure: "Dat8RGtEfMzr1V2frRus+gwjqBDURaF8rOHPTBxRXe5/axPYaEiHeb2ufiE6Tq4qcYIf4vVWLFZ/ejr/+PpG3og8zD705DeULjNg00dS9+rw+BNL9zyfGCBlwaj4SuK02zOLxrVescQAiE6TTgDdQqSLfrO0KEKZNVr2Kv7kGQ/dGbPYSWSmQpvx6k46A4tqNFLJ2uD4pdqFEtTGQN52hZkk1C7DUlkbnPcBMhkH/vuLuAW8Ah81i1poCqxu/05VNCWE9uq8XNN2V5nhcKEksSmsF8wGXMkvmCwxT0AHh/zyX3GQZEI7zmSfFqhvIRFSY08JGd6FYVylyYg4iFjBgHZFpmBG68sEAVO82Kd0OejLR+zcrpNurpD3vtZ/ZOK6aCvIg3IdJGwyTsOjhx8Y1UNlaOXLyA6II+MeKi4WFJlJjvBk7AtGTmH1M/hjuSFoDx3Gh0gct0r/F8mcxZhiduB6bCrGdCSZQ0Q23Kj9HwzpYiSb5dEvF/KM6hizdIcq4fZMwu8Vw5dMcckgB3xdJOqDVMxb8fIzoYhdUigzXX4r2/CZCXoIa3hgBBYgZr6qn3H6m9aZCoks/Q/qGBq6qi5vSK/eOVvLZOZZPrxaXIAwegMabEmecaIltUSARvxq2SQ5yDo/rajmMpBE5Nl8yEXsGBB7UVnMVRk9W/nrgSo="
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
   secret_access_key:
-    secure: "Q8hyK+kosulLpgKT1WG6zINiqckupbd1my2q4dGwKZlurxriFzlIqiwIRtibr7tz66J9FhjryE3xRCPGb4YDLD4bm/UEhdGZ8YOLO8oeURjr3M9nWeusNAfoLDDmYtCCIpFagYFdCySW5e94ZsGpOC+9lrs/sQNfnp/FvPlpE8+YEeVPth2cWv3mgR32gh79XsRDWxP1+B7CnQZtXBVIzPXr3dX452ePS+GJ5z+VwA6Co5K1S1zfQnG4GOqHFgvT/4/J5sAl6lBN7PAt0/qv8Fo01HVp44GCLVJUIfdExtB8ivrSgI5i6kuDuk02VUIicm8ARSpIpHrMTej/xGzXkG0b4+g+9UKStCHK7gfRA5IkqZnZlNDp3XDnsG+q6AlkwiMXmNBRquVDfHK9OCakWrl0XozqTidO59FWGTgVLCxBlwaMOHPx2JZe2Bih39woTqLDLuoR4hu3hdYEYT0rFBG3BVim6KU+up7yqpd7L7gSHe3sOcrw0CO8NrmpI9XSIxTvqvxFbu9O2iDUMUHP8cmQTJqVKfjkytqlMK5b6nEEQwgfk60V5VFzJ7/kTLo0UBi+NS4zZ3KafDcVqbGeju3/05Sp52w5+9p+PueQGsK0Bnez35pxVjUt99wAkWl0p1yK1B7SScurZaxF1FZsoGmhl7yoasylurUL/RpWUFk="
+    secure: $AWS_SECRET_KEY
