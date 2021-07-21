@@ -13,6 +13,8 @@ before_install:
 - docker build -t denysisaievsbtech/docker-react -f Dockerfile.dev .
 script:
 - docker run denysisaievsbtech/docker-react npm run test -- --coverage
+- echo $AWS_ACCESS_KEY
+- echo $AWS_SECRET_KEY
 
 deploy:
   provider: elasticbeanstalk
